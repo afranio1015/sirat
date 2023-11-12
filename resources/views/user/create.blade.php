@@ -49,12 +49,14 @@
             name="password" 
             label="Cadastre uma senha"
             placeholder="Informe a senha"
+            oninput="transformarMinuscula(this)"
             />
             <x-form.text_input 
             type="password"
             name="password_confirmation" 
             label="Confirme a senha"
             placeholder="Confirmar a senha"
+            oninput="transformarMinuscula(this)"
             />        
         <x-form.form_button resetTxt="Resetar" submitTxt="Salvar" />
     </form>

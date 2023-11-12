@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
 
 class CategoryController extends Controller
 {
@@ -14,20 +16,22 @@ class CategoryController extends Controller
     public function create(Request $request){
         $list = Category::all();
         return view('category.create',[
-            'list' => $list
+            'list' => $list,
         ]);
     }
 
     public function create_action(Request $request){
 
-              $request->validate([
+           $validateData = $request->validate([
                 'description' => 'required|unique:categories|min:4'
             ]);
+            //dd($validateData);
 
         $cat = $request->only(['description']);
-        $dbcat = Category::create($cat);        
+        $dbcat = Category::create($cat); 
 
-        return view('category.create');       
+        return redirect(route('category.create'));   
+           
 
     }
     public function edit(Request $request){             

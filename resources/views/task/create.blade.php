@@ -17,10 +17,14 @@
         <form method="POST" action="{{route('task.create_action')}}">
             @csrf            
             <x-form.text_input
+            required
+            id="description"
             name="description"
+            pattern="[a-zA-Z][a-zA-Z0-9-_\.]{1,20}"
             label="Atividade"
             placeholder="Digite a atividade"            
             />
+            {{-- <small class="error"> A Atividade deve ser no mínimo 2 e máximo 30 caracteres</small> --}}
             <x-form.text_input
             name="point"
             label="Pontos"

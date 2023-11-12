@@ -10,6 +10,8 @@
         </x-slot:btn>              
     
     <section class="register">
-        <span class="primary label"> Seja Bem-vindo(a): {{$AuthUser->name}}</span>        
+        <span class="primary label"> Seja Bem-vindo(a): {{$AuthUser->name}}</span>              
      </section>
+     <br> <div>@php $hoje = time()+(7*24*60*60) @endphp </div> 
+     {{$hoje}}
 </x-layout>

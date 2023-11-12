@@ -13,6 +13,7 @@ class DepartmentController extends Controller
     }
     public function create(Request $request){
         $list = Department::all();
+        
         return view('department.create',[
             'list' => $list
         ]);

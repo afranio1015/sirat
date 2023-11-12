@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Department;
 use App\Models\Category;
 use App\Models\Task;
+use App\Models\Record;
 
 class TaskController extends Controller
 {
@@ -29,7 +30,7 @@ class TaskController extends Controller
         $task = $request->only(['description', 'point', 'category_id', 'department_id']);
         
         $dbTask = Task::create($task);
-        return redirect(route('home'));
+        return redirect(route('task.create'));
     }
 
     public function edit(Request $request){      
@@ -73,6 +74,25 @@ class TaskController extends Controller
         if($task){
             $task->delete();
         }
-        return redirect(route('home'));
+        return redirect(route('record.create'));
+    }
+
+    public function obterPontosDaTarefa($tarefa_id, Request $request){ 
+        $quantidade = $request->quantity;       
+        
+        $tarefa = Task::find($tarefa_id);
+        $quantidade = Record::find($quantidade);        
+
+        if(!$tarefa){              
+            return response()->json(['error' => 'Tarefa não Encontrada'], 404);          
+        }
+        $quantidade = $request->input('quantidade');
+        $pontos = $tarefa->point;
+
+        //Realizar o cálculo do total de pontos
+        $totalPontos = $quantidade * $pontos;
+        
+        return response()->json(['totalPontos'=>$totalPontos]);        
+        
     }
 }

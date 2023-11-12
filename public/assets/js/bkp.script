@@ -1,0 +1,61 @@
+function transformarMaiuscula(ustr) {
+    let str = ustr.value; //obtém o valor do campo
+        ustr.value = str.toUpperCase(); //converte as strings e retorna ao campo
+}
+
+function transformarMinuscula(lstr){
+    let str = lstr.value;
+    lstr.value = str.toLowerCase();
+}    
+
+        // Event listener para calcular totalPontos quando a quantidade ou a tarefa forem alteradas
+//   document.querySelector('.quantidade').addEventListener('input', calcularTotalPontos);
+//   document.querySelector('.tarefa_id').addEventListener('change', calcularTotalPontos);
+
+document.querySelectorAll('.quantidade').forEach(function (element){
+    element.addEventListener('input', calcularTotalPontos);
+});
+
+document.querySelectorAll('.tarefa_id').forEach(function(element){
+    element.addEventListener('change', calcularTotalPontos);
+});
+
+ function calcularTotalPontos(event) {
+
+    // const quantidade = parseFloat(document.querySelector('.quantidade').value);
+    // const tarefa_id = parseFloat(document.querySelector('.tarefa_id').value);
+
+    const quantidade = parseFloat(event.target.parentElement.querySelector('.quantidade').value);
+    const tarefa_id = parseFloat(event.target.parentElement.querySelector('.tarefa_id').value);
+
+    // Aqui você precisa obter os pontos da tarefa selecionada
+    const pontosDaTarefa = obterPontosDaTarefa(tarefa_id);    
+}
+
+
+function obterPontosDaTarefa(tarefa_id) {
+     const quantidade = parseFloat(document.querySelector('.quantidade').value);
+    // const quantidade = parseFloat(event.target.parentElement.querySelector('.quantidade').value);
+    // Requisição AJAX para obter os pontos da tarefa selecionada do servidor
+    
+        $.ajax({
+            url:'/obter-pontos-tarefa/' + tarefa_id,
+            method: 'GET',
+            data: {quantidade: quantidade},
+            success: function (response){                
+                
+                if (response.totalPontos){
+                    //Atualizar o campo totalPontos com os pontos obtidos
+                    document.querySelector('.totalPontos').value = response.totalPontos;
+                } else {
+                    //tratar erros, se necessário
+                }
+            },
+            error: function (xhr, status, error){
+                //tratar erros, se necessário
+            }
+        });
+}
+obterPontosDaTarefa();
+
+        

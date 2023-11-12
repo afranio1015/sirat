@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Task;
-use App\Models\Working_hour;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -14,12 +14,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('records', function (Blueprint $table) {
-            $table->id();            
-            $table->foreignIdFor(Working_hour::class)->references('id')->on('working_hours')->onDelete('CASCADE');
+            $table->id();
+            $table->date('current_date');                    
+            $table->foreignIdFor(User::class)->references('id')->on('users')->onDelete('CASCADE');
             $table->string('object');
             $table->string('interested');
             $table->foreignIdFor(Task::class)->references('id')->on('tasks')->onDelete('CASCADE');
-            $table->integer('quantity');
+            $table->integer('quantity');  
+            $table->integer('total_points');           
             $table->timestamps();
         });
     }
@@ -31,7 +33,7 @@ return new class extends Migration
     {
         Schema::table('records', function(Blueprint $table){
             $table->dropForeignIdFor(Task::class); 
-            $table->dropForeignIdFor(Whorkin_hour::class);           
+            $table->dropForeignIdFor(User::class);           
         });
         Schema::dropIfExists('records');
     }

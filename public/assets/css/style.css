@@ -173,7 +173,7 @@ h2{
     margin-top: 30px;
     background-color: var(--background-light);  
     overflow-y: scroll;
-    height: 150px;
+    height: 300px;
 } 
 table {
     border-collapse: collapse;
@@ -277,6 +277,11 @@ input {
         background-color: var(--background-light);
         color: var(--text-dark);
         padding: 10px;
+      }
+      .data-tasks{
+        display: flex;
+        background-color: #f3edec;
+        padding-right: 5px;
       }
     
     

@@ -15,16 +15,20 @@
     <fieldset><legend>Editar Registro de Atividades</legend>
     <form method="POST" action="{{route('record.edit_action')}}">
         @csrf  
-        <input type="hidden" name="id" value="{{$records->id}}" />
-        <x-form.select_input
-            name="working_hour_id"
-            label="Expediente"
-            placeholder=""> 
-                @foreach ($working_hours as $wr )
-                <option value="{{$wr->id}}">{{$wr->currentDate}}</option>                 
-                @endforeach 
-        </x-form.select_input>
-
+        <input type="hidden" name="id" value="{{$records->id}}" />  
+        
+        <x-form.text_input
+            name="current_date"
+            label="Data de Hoje"
+            placeholder="Data de Hoje" 
+            value="{{$records->current_date}}"           
+        />
+        <x-form.text_input
+            name="user_id"
+            label="Usuário"
+            placeholder="Usuario" 
+            value="{{$records->user_id}}"           
+        />        
         <x-form.text_input
             name="object"
             label="Objeto"
@@ -50,7 +54,13 @@
             label="Quantidade"
             placeholder="Quantidade"
             value="{{$records->quantity}}"            
-        />  
+        /> 
+        <x-form.text_input
+            name="total_points"
+            label="Total"
+            placeholder="Total"
+            value="{{$records->total_points}}"            
+        />   
         <x-form.form_button resetTxt="Resetar" submitTxt="Salvar" />
     </form>
     </fieldset>    

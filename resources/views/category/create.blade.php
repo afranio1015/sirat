@@ -27,35 +27,35 @@
         
         <div class='list-area'>
             @if (count($list) > 0)
-                <table >
-                    <caption>
-                        <h4>Lista de Categorias</h4>
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Descrição</th>                            
-                            <th>Editar</th>
-                            <th>Excluir</th>
-                        </tr>
-                    </thead>
-                    @foreach ($list->all() as $item)
-                        <tbody>
+                    <table >
+                        <caption>
+                            <h4>Lista de Categorias</h4>
+                        </caption>
+                        <thead>
                             <tr>
-                                <td>{{$item->id}}</td>
-                                <td>{{$item->description}}</td>                                
-                                <td><a href="{{route('cat.edit', ['id' => $item->id])}}">
-                                    <img src="/assets/images/icon-edit.png" />
-                                </a></td>
-                                <td><a href="{{route('cat.delete', ['id' => $item['id']])}}">
-                                    <img src="/assets/images/icon-delete.png" />
-                                </a></td>
+                                <th>ID</th>
+                                <th>Descrição</th>                            
+                                <th>Editar</th>
+                                <th>Excluir</th>
                             </tr>
-                        </tbody>                    
-                    @endforeach
-                </table>
-            @else
-                Não há itens a serem listados!
+                        </thead>
+                        @foreach ($list->all() as $item)
+                            <tbody>
+                                <tr>
+                                    <td>{{$item->id}}</td>
+                                    <td>{{$item->description}}</td>                                
+                                    <td><a href="{{route('cat.edit', ['id' => $item->id])}}">
+                                        <img src="/assets/images/icon-edit.png" />
+                                    </a></td>
+                                    <td><a href="{{route('cat.delete', ['id' => $item['id']])}}">
+                                        <img src="/assets/images/icon-delete.png" />
+                                    </a></td>
+                                </tr>
+                            </tbody>                    
+                        @endforeach
+                    </table>
+                @else
+                    Não há itens a serem listados!
                 
             @endif
     

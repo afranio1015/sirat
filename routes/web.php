@@ -5,7 +5,6 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\WorkingHourController;
 use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +42,7 @@ Route::post('/task/create_action', [TaskController::class, 'create_action'])->na
 Route::get('/task/edit', [TaskController::class, 'edit'])->name('task.edit');
 Route::post('/task/edit_action', [TaskController::class, 'edit_action'])->name('task.edit_action');
 Route::get('/task/delete', [TaskController::class, 'delete'])->name('task.delete');
+Route::get('obter-pontos-tarefa/{tarefa_id}', [TaskController::class, 'obterPontosDaTarefa']);
 
 //Rotas do do usuário
 Route::get('/user/new', [AuthController::class, 'create'])->name('user.create');
@@ -53,11 +53,11 @@ Route::get('/user/delete', [AuthController::class, 'delete'])->name('user.delete
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //Rotas do Expediente
-Route::get('/working_hour/new', [WorkingHourController::class, 'create'])->name('working_hour.create');
-Route::post('/working_hour/create_action', [WorkingHourController::class, 'create_action'])->name('working_hour.create_action');
-Route::get('/working_hour/edit', [WorkingHourController::class, 'edit'])->name('working_hour.edit');
-// Route::post('/working_hour/edit_action', [WorkingHourController::class, 'edit_action'])->name('working_hour.edit_action');
-Route::get('/working_hour/delete', [WorkingHourController::class, 'delete'])->name('working_hour.delete');
+// Route::get('/working_hour/new', [WorkingHourController::class, 'create'])->name('working_hour.create');
+// Route::post('/working_hour/create_action', [WorkingHourController::class, 'create_action'])->name('working_hour.create_action');
+// Route::get('/working_hour/edit', [WorkingHourController::class, 'edit'])->name('working_hour.edit');
+// // Route::post('/working_hour/edit_action', [WorkingHourController::class, 'edit_action'])->name('working_hour.edit_action');
+// Route::get('/working_hour/delete', [WorkingHourController::class, 'delete'])->name('working_hour.delete');
 
 //Rotas para registrar atividades
 Route::get('/record/new', [RecordController::class, 'create'])->name('record.create');
@@ -65,10 +65,13 @@ Route::post('/record/create_action', [RecordController::class, 'create_action'])
 Route::get('/record/edit', [RecordController::class, 'edit'])->name('record.edit');
 Route::post('/record/edit_action', [RecordController::class, 'edit_action'])->name('record.edit_action');
 Route::get('/record/delete', [RecordController::class, 'delete'])->name('record.delete');
+Route::get('/record/datatask', [RecordController::class, 'datatask']);
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login_action'])->name('user.login_action');
+
+
 
 // Route::get('/', function () {
 //     return view('welcome');
